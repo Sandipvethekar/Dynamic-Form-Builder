@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Dynamic Form Builder</h2>
+    <div class="mb-3">
+        <button class="btn btn-info m-2" (click)="addField('text')">Add Text Field</button>
+        <button class="btn btn-info m-2" (click)="addField('textarea')">Add Textarea</button>
+        <button class="btn btn-info m-2" (click)="addField('dropdown')">Add Dropdown</button>
+        <button class="btn btn-info m-2" (click)="addField('checkbox')">Add Checkbox</button>
+        <button class="btn btn-info m-2" (click)="addField('radio')">Add Radio Button</button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <app-form-field *ngFor="let field of formBuilderService.fields; index as i" [field]="field" [form]="form"
+            (remove)="removeField(i)">
+        </app-form-field>
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>

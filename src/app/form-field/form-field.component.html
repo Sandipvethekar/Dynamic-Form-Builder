@@ -1,0 +1,25 @@
+<div class="form-group mb-3" [formGroup]="form">
+    <label>{{ field.label }}</label>
+    <input *ngIf="field.type === 'text'" type="text" class="form-control" [formControlName]="field.name"
+        [placeholder]="field.placeholder" [required]="field.required">
+    <textarea *ngIf="field.type === 'textarea'" class="form-control" [formControlName]="field.name"
+        [placeholder]="field.placeholder" [required]="field.required"></textarea>
+    <select *ngIf="field.type === 'dropdown'" class="form-control" [formControlName]="field.name">
+        <option *ngFor="let option of field.options" [value]="option">{{ option }}</option>
+    </select>
+    <div *ngIf="field.type === 'checkbox'" class="form-check">
+        <input type="checkbox" class="form-check-input" [formControlName]="field.name">
+        <label class="form-check-label">{{ field.label }}</label>
+    </div>
+    <div *ngIf="field.type === 'radio'" class="form-check">
+        <div *ngFor="let option of field.options">
+            <input type="radio" class="form-check-input" [formControlName]="field.name" [value]="option"
+                [name]="field.name">
+            <label class="form-check-label">{{ option }}</label>
+        </div>
+    </div>
+    <div *ngIf="isTouched && !isValid" class="text-danger">
+        {{ field.label }} is required
+    </div>
+    <button type="button" class="btn btn-danger mt-2" (click)="removeField()">Remove</button>
+</div>
